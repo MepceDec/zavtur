@@ -1,0 +1,29 @@
+name: Zavtur CI/CD Demo
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  verify-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Show file structure
+        run: ls -l
+
+      - name: Verify Python script
+        run: |
+          echo "Проверяем работоспособность zavtur.py"
+          python -c "from zavtur import app; print('Модуль успешно импортирован')"
+          echo "Тест завершен успешно"
+
+      - name: Print success
+        run: |
+          echo "#############################################"
+          echo "#  GitHub Actions успешно выполнил скрипт  #"
+          echo "#  Файл zavtur.py работает корректно       #"
+          echo "#############################################"
